@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 
@@ -23,12 +22,7 @@ func main() {
 		fmt.Println("no bot token")
 		return
 	}
-	id, err := strconv.Atoi(os.Getenv("TELEGRAM_TECHCATS_CHAT_TO_ME"))
-	if err != nil || id == 0 {
-		fmt.Println("no chat id and err: ", err)
-		return
-	}
-	tgs.ChatID = int64(id)
+	tgs.ChatID = -1001179220569
 
 	objectKey := make([]byte, chacha20poly1305.KeySize)
 	if _, err := rand.Read(objectKey); err != nil {
