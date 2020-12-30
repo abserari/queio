@@ -4,7 +4,6 @@ import (
 	"context"
 	"crypto/rand"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"strings"
@@ -31,7 +30,7 @@ func main() {
 
 	startTime := time.Now()
 
-	object, err := tgs.Upload(
+	_, err := tgs.Upload(
 		context.TODO(),
 		objectKey,
 		strings.NewReader("Hello, 世界"),
@@ -44,31 +43,31 @@ func main() {
 
 	startTime = time.Now()
 
-	downloadedObject, err := tgs.Download(
-		context.TODO(),
-		object.ID,
-		objectKey,
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
+	// downloadedObject, err := tgs.Download(
+	// 	context.TODO(),
+	// 	object.ID,
+	// 	objectKey,
+	// )
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
-	fmt.Println("Download time:", time.Since(startTime))
+	// fmt.Println("Download time:", time.Since(startTime))
 
-	startTime = time.Now()
+	// startTime = time.Now()
 
-	rc, err := downloadedObject.NewReader(context.TODO())
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer rc.Close()
+	// rc, err := downloadedObject.NewReader(context.TODO())
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// defer rc.Close()
 
-	b, err := ioutil.ReadAll(rc)
-	if err != nil {
-		log.Fatal(err)
-	}
+	// b, err := ioutil.ReadAll(rc)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
-	fmt.Println("Read time:", time.Since(startTime))
+	// fmt.Println("Read time:", time.Since(startTime))
 
-	fmt.Println("Content:", string(b))
+	// fmt.Println("Content:", string(b))
 }
